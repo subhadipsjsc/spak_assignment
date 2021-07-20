@@ -1,0 +1,71 @@
+###
+GET http://localhost:8000/ HTTP/1.1
+
+###
+GET http://localhost:8000/user HTTP/1.1
+
+###
+POST http://localhost:8000/user/create HTTP/1.1
+content-type: application/json
+
+{
+    "name": "subhadip",
+    "email": "subhadip.papai@gmail.com",
+    "password":"abcd12345"
+}
+
+###
+POST http://localhost:8000/user/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "subhadip.papai@gmail.com",
+    "password":"abcd12345"
+}
+
+###
+POST http://localhost:8000/user/verify-account HTTP/1.1
+content-type: application/json
+
+{
+    "id": "60f3013ae6597b1738db5b3a",
+    "code":"ABCD1234"
+}
+
+
+
+###
+GET http://localhost:8000/list HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjY3MTg5OTUsImRhdGEiOnsidXNlcklkIjoiNjBmMzAxM2FlNjU5N2IxNzM4ZGI1YjNhIiwibmFtZSI6InN1YmhhZGlwIiwiZW1haWwiOiJzdWJoYWRpcC5wYXBhaUBnbWFpbC5jb20iLCJpc1ZlcmlmaWVkIjp0cnVlfSwiaWF0IjoxNjI2NzE1Mzk1fQ.chC5V9MnnXYNWtEuqP3yYn0nFYDX6uNKtpiqhUctiDc
+
+
+###
+POST http://localhost:8000/list/add HTTP/1.1
+content-type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjY3MTg5OTUsImRhdGEiOnsidXNlcklkIjoiNjBmMzAxM2FlNjU5N2IxNzM4ZGI1YjNhIiwibmFtZSI6InN1YmhhZGlwIiwiZW1haWwiOiJzdWJoYWRpcC5wYXBhaUBnbWFpbC5jb20iLCJpc1ZlcmlmaWVkIjp0cnVlfSwiaWF0IjoxNjI2NzE1Mzk1fQ.chC5V9MnnXYNWtEuqP3yYn0nFYDX6uNKtpiqhUctiDc
+
+{
+    "task": "some task 4",
+    "position":"4"
+}
+
+
+###
+PATCH  http://localhost:8000/list/mark-completed/60f5b8b9789fb00e881d6ee3 HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjY3MTg5OTUsImRhdGEiOnsidXNlcklkIjoiNjBmMzAxM2FlNjU5N2IxNzM4ZGI1YjNhIiwibmFtZSI6InN1YmhhZGlwIiwiZW1haWwiOiJzdWJoYWRpcC5wYXBhaUBnbWFpbC5jb20iLCJpc1ZlcmlmaWVkIjp0cnVlfSwiaWF0IjoxNjI2NzE1Mzk1fQ.chC5V9MnnXYNWtEuqP3yYn0nFYDX6uNKtpiqhUctiDc
+
+
+###
+DELETE  http://localhost:8000/list/delete-task/60f344cef938c45f52501820 HTTP/1.1
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjY1NTc2MTcsImRhdGEiOnsidXNlcklkIjoiNjBmMzAxM2FlNjU5N2IxNzM4ZGI1YjNhIiwibmFtZSI6InN1YmhhZGlwIiwiZW1haWwiOiJzdWJoYWRpcC5wYXBhaUBnbWFpbC5jb20ifSwiaWF0IjoxNjI2NTU0MDE3fQ.w0IQkE2VdSxghW_BF_HOF4Z9xBpnn0Gx_aEcg-rxPGQ
+
+
+###
+PATCH http://localhost:8000/list/update-position HTTP/1.1
+content-type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjY1NTc2MTcsImRhdGEiOnsidXNlcklkIjoiNjBmMzAxM2FlNjU5N2IxNzM4ZGI1YjNhIiwibmFtZSI6InN1YmhhZGlwIiwiZW1haWwiOiJzdWJoYWRpcC5wYXBhaUBnbWFpbC5jb20ifSwiaWF0IjoxNjI2NTU0MDE3fQ.w0IQkE2VdSxghW_BF_HOF4Z9xBpnn0Gx_aEcg-rxPGQ
+
+[{
+    "taskId": "60f346c6e5a7b563204055ef",
+    "position":"1.5"
+}]

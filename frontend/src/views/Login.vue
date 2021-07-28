@@ -26,7 +26,13 @@
         </div>
       </div>
       <div>
-        <button class="button" type="submit" @click="handleSubmit">Login</button>
+        <button class="button" type="submit" @click="handleSubmit">
+          Login
+        </button>
+      </div>
+      <div style="margin-top: 10px">
+        New user , Please
+        <router-link to="/signup"> click here </router-link> to signup
       </div>
     </form>
   </div>

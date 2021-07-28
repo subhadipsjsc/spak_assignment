@@ -41,6 +41,10 @@
           Submit
         </button>
       </div>
+      <div style="margin-top: 10px">
+        Have account , Please
+        <router-link to="/login"> click here </router-link> to Login
+      </div>
     </form>
   </div>
 </template>

@@ -12,7 +12,7 @@ router.post('/create', async(req,res) => {
     try{
         validationResult = validateUser(req.body)        
         if (validationResult.error ){
-            res.status(400).send({"success" : 0,"error" : "validation error" ,"data" : req.body}); 
+            res.status(400).send({"success" : 0,"error" : validationResult.error ,"data" : req.body}); 
         }
         else{
             const newUserDetails = new User (validationResult.value);
@@ -46,7 +46,7 @@ router.post('/login', async(req,res) => {
                     userId : userData._id ,
                     name: userData.name ,
                     email: userData.email ,
-                    isVerified:userData.is_verified
+                    is_verified:userData.is_verified
                 }              
                 if (userData.is_verified){
                     const jwt_token = createToken(user_sanitized_data)

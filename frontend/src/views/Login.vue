@@ -1,6 +1,7 @@
 <template>
   <div class="login">
     <h1>Login</h1>
+    <p>{{ error }}</p>
     <form>
       <label class="label" for="email">E-Mail Address</label>
       <div>
@@ -46,11 +47,13 @@ export default {
     return {
       email: "",
       password: "",
+      error: "",
     };
   },
   computed: {
     ...mapGetters({
       user_and_token: "auth/user_and_token",
+      auth_errors: "auth/auth_errors",
     }),
   },
   watch: {
@@ -61,9 +64,15 @@ export default {
         this.$router.push({ name: "Home" });
       }
     },
+    auth_errors: function (val) {
+      if (val != "") {
+        this.error = val;
+      }
+    },
   },
   methods: {
     handleSubmit(e) {
+      this.error = "";
       e.preventDefault();
       if (this.password.length > 0) {
         const loginData = {
@@ -71,6 +80,8 @@ export default {
           password: this.password,
         };
         this.loginAction(loginData);
+      } else {
+        this.error = "Email and Password , both mandetory";
       }
     },
     ...mapActions({
@@ -80,6 +91,8 @@ export default {
   mounted: function () {
     if (this.user_and_token.token != "") {
       this.$router.push({ name: "Home" });
+    } else if (this.user_and_token && this.user_and_token.user) {
+      this.email = this.user_and_token.user.email || "";
     }
   },
 };

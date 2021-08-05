@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const now = Date.now() / 1000;
     const TokenExpiation = localStorage.getItem("tokenExpireTime") || null;
-    if (now > TokenExpiation) {
+    if (TokenExpiation != null && now > TokenExpiation) {
       localStorage.setItem("token", "");
       localStorage.setItem("user", "");
       next({ name: "Login" });

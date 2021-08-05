@@ -1,6 +1,12 @@
 export const SET_USER = (state, user) => {
-  localStorage.setItem("user", JSON.stringify(user));
-  state.user = { ...user };
+  console.log(user);
+  if (user) {
+    localStorage.setItem("user", JSON.stringify(user));
+    state.user = { ...user };
+  } else {
+    localStorage.setItem("user", "");
+    state.user = null;
+  }
 };
 
 export const SET_TOKEN = (state, token) => {
@@ -9,6 +15,10 @@ export const SET_TOKEN = (state, token) => {
   localStorage.setItem("token", token);
   localStorage.setItem("tokenExpireTime", JWT_expiration);
   state.token = token;
+};
+
+export const SET_ERROR = (state, err) => {
+  state.error = err;
 };
 
 export const SET_USER_VERIFIED = (state, status) => {

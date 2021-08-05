@@ -2,12 +2,12 @@
   <div class="signup">
     <h1>Sign Up</h1>
     <form>
-      <label class="label" for="email">Name</label>
+      <label class="label" for="name">Name</label>
       <div>
         <input
           class="input"
-          id="email"
-          type="email"
+          id="name"
+          type="text"
           v-model="name"
           required
           autofocus
@@ -15,14 +15,7 @@
       </div>
       <label class="label" for="email">E-Mail Address</label>
       <div>
-        <input
-          class="input"
-          id="email"
-          type="email"
-          v-model="email"
-          required
-          autofocus
-        />
+        <input class="input" id="email" type="email" v-model="email" required />
       </div>
       <div>
         <label class="label" for="password">Password</label>
@@ -50,8 +43,7 @@
 </template>
 
 <script>
-import CONFIG from "@/config.js";
-import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -61,30 +53,41 @@ export default {
       password: "",
     };
   },
+  computed: {
+    ...mapGetters({
+      user_and_token: "auth/user_and_token",
+    }),
+  },
+  watch: {
+    user_and_token: function (val) {
+      if (val.user != null && val.token == "") {
+        this.$router.push({ name: "VerifyUser" });
+      } else if (val.user != null && val.token != "") {
+        this.$router.push({ name: "Login" });
+      }
+    },
+  },
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      if (this.password.length > 0) {
-        axios
-          .post(`${CONFIG.backendURL}/user/create`, {
-            name: this.name,
-            email: this.email,
-            password: this.password,
-          })
-          .then((response) => {
-            if (
-              response.status == 200 &&
-              response.data &&
-              response.data.success == 1
-            ) {
-              this.$router.push("/login");
-            }
-          })
-          .catch(function (error) {
-            console.error(error.response);
-          });
+
+      if (
+        this.name.length > 0 &&
+        this.email.length > 0 &&
+        this.password.length > 0
+      ) {
+        console.log("test");
+        const signupData = {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        };
+        this.signupAction(signupData);
       }
     },
+    ...mapActions({
+      signupAction: "auth/signupAction",
+    }),
   },
 };
 </script>

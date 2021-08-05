@@ -4,3 +4,6 @@ export const user_and_token = (state) => {
     user: state.user,
   };
 };
+export const auth_errors = (state) => {
+  return state.error;
+};

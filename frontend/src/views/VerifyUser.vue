@@ -47,6 +47,7 @@ export default {
           id: this.user.userId,
           code: this.code,
         };
+        console.log(verification_data);
         this.verificationAction(verification_data);
       }
     },
@@ -55,8 +56,7 @@ export default {
     }),
   },
   mounted: function () {
-    console.log(this.user.isVerified);
-    if (this.user.isVerified) {
+    if (this.user.is_verified) {
       this.$router.push({ name: "Login" });
     }
   },
